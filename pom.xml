@@ -63,7 +63,7 @@
   <dependencies>
     <dependency>
       <groupId>org.jboss.forge.addon</groupId>
-      <artifactId>core</artifactId>
+      <artifactId>ui</artifactId>
       <classifier>forge-addon</classifier>
     </dependency>
     <dependency>
@@ -76,11 +76,26 @@
       <groupId>javax.annotation</groupId>
       <artifactId>jsr250-api</artifactId>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>io.smallrye</groupId>
       <artifactId>smallrye-config</artifactId>
       <version>1.5.0</version>
-    </dependency>
+    </dependency> -->
+    <!-- <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client-microprofile</artifactId>
+      <version>4.5.0.Final</version>
+      <exclusions>
+        <exclusion>
+          <groupId>io.smallrye.config</groupId>
+          <artifactId>smallrye-config</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.eclipse.microprofile.config</groupId>
+          <artifactId>microprofile-config-api</artifactId>
+        </exclusion>        
+      </exclusions>
+    </dependency> -->
     <dependency>
       <groupId>org.jboss.forge.furnace.test</groupId>
       <artifactId>furnace-test-harness</artifactId>
@@ -92,8 +107,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.forge.mp.config</groupId>
-      <artifactId>forge-mp-config</artifactId>
+      <groupId>org.jboss.forge.addon</groupId>
+      <artifactId>microprofile-config</artifactId>
+      <classifier>forge-addon</classifier>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.forge.mp.rest.client</groupId>
+      <artifactId>forge-mp-rest-client</artifactId>
       <classifier>forge-addon</classifier>
       <version>1.0.0-SNAPSHOT</version>
       <scope>provided</scope>
