@@ -5,17 +5,17 @@ import javax.ws.rs.Path;
 
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import org.jboss.forge.addon.OAuth2Provider;
+import org.jboss.forge.addon.BasicProvider;
 
 /**
- * CountryResource
+ * BasicResource
  */
-@RegisterRestClient(configKey = "")
-@RegisterProvider(value = OAuth2Provider.class)
-public interface CountryResource extends OriginalResource {
+@RegisterRestClient(baseUri = "http://localhost:8181")
+@RegisterProvider(value = BasicProvider.class)
+public interface BasicResource {
 
     @GET
-    @Path("/customers")
+    @Path("/basic")
     public String getProps();
-
+    
 }

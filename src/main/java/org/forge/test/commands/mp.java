@@ -7,6 +7,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Provider;
+import javax.ws.rs.RedirectionException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -40,16 +43,36 @@ public class mp extends AbstractUICommand {
 	@RestClient
 	CountryResource cr;
 
+	@Inject
+	@RestClient
+	BasicResource br;
+
 
 	@Override
 	public Result execute(UIExecutionContext context) throws Exception {
 		// System.out.println( cr.getProps() );
-		Properties props = new Properties();
-		props.load(new StringReader(cr.getProps()));
+		try {
+			System.out.println( cr.getProps() );
+
+		} catch (RedirectionException ex) {
+			System.out.println(ex.getResponse().getStatusInfo().getReasonPhrase());
+			return Results.fail(ex.getMessage());
+		} catch (WebApplicationException ex) {
+			Response resp = ex.getResponse();
+			System.out.println(ex.getMessage());
+			return Results.fail(ex.getResponse().getStatusInfo().getReasonPhrase());
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName());
+			return Results.fail(e.getMessage());
+		}
+
+
+		// Properties props = new Properties();
+		// props.load(new StringReader(cr.getProps()));
 		// return Results.success("Command 'mp' successfully executed with " + config.getValue("key", String.class) + "!");
 		// String dynamic = config.getValue("configsource.properties.url", String.class);
 		// String opt = optional.get();
-		return Results.success("Command 'mp' successfully executed with " + optional.get() + " " + props.getProperty("key") + "!");
+		return Results.success("Command 'mp' successfully executed with " + optional.get() + "!");
 	}
 
 	@Override
